@@ -31,7 +31,7 @@ class AppTheme{
 
   static setStatusBarAndNavigationBarColors(ThemeMode themeMode){
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-       : Colors.transparent,
+      statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.light,
       systemNavigationBarColor:lightBackgroundColor,
       systemNavigationBarDividerColor: Colors.transparent,
