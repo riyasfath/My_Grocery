@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-class Carousal extends StatelessWidget {
-  const Carousal({Key? key}) : super(key: key);
+class CarouselLoading extends StatelessWidget {
+  const CarouselLoading({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
