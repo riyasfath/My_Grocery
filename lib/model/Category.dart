@@ -1,18 +1,18 @@
 import 'dart:convert';
 
-List<Category> popularCategoryFromJson(String val) => List<Category>.from(json
+List<Categories> popularCategoryFromJson(String val) => List<Categories>.from(json
     .decode(val)['data']
-    .map((category) => Category.popularCategoryFromJson(category)));
+    .map((category) => Categories.popularCategoryFromJson(category)));
 
-class Category {
+class Categories {
   final int id;
   final String name;
   final String image;
 
-  Category({required this.id, required this.name, required this.image});
+  Categories({required this.id, required this.name, required this.image});
 
-  factory Category.popularCategoryFromJson(Map<String, dynamic> data) =>
-      Category(
+  factory Categories.popularCategoryFromJson(Map<String, dynamic> data) =>
+      Categories(
           id: data['id'],
           name: data['attributes']['category']['data']['attributes']['name'],
           image: data['attributes']['category']['data']['attributes']['image']

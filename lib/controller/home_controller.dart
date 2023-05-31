@@ -7,7 +7,7 @@ import 'package:my_grocery/services/remote_service/remote_popular_category_servi
 class HomeController extends GetxController{
   static HomeController instance =Get.find();
   RxList<AdBanner> bannerList=List<AdBanner>.empty(growable: true).obs;
-  RxList<Category> popularCategoryList=List<Category>.empty(growable: true).obs;
+  RxList<Categories> popularCategoryList=List<Categories>.empty(growable: true).obs;
 
   RxBool isBannerLoading =false.obs;
   RxBool isPopularCategoryLoading =false.obs;
