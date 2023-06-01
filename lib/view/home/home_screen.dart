@@ -6,6 +6,7 @@ import 'package:my_grocery/view/home/components/carousal_slider/carousal_slider_
 import 'package:my_grocery/view/home/components/carousal_slider/carousel_loading.dart';
 import 'package:my_grocery/view/home/components/popular_category/popular_category.dart';
 import 'package:my_grocery/view/home/components/popular_category/popular_category_loading.dart';
+import 'package:my_grocery/view/home/components/popular_product/popular_product_loading.dart';
 import 'package:my_grocery/view/home/components/section_title.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -17,26 +18,47 @@ class HomeScreen extends StatelessWidget {
       child: Column(
         children: [
           const MainHeader(),
-          Obx(() {
-            if (homeController.bannerList.isNotEmpty) {
-              return CarouselSlideView(bannerList: homeController.bannerList);
-            } else {
-              return const CarouselLoading(
+          Expanded(child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Column(
+              children: [
 
-              );
-            }
-          }),
-          const SectionTitle(title: "Popular Category"),
+                Obx(() {
+                  if (homeController.bannerList.isNotEmpty) {
+                    return CarouselSlideView(bannerList: homeController.bannerList);
+                  } else {
+                    return const CarouselLoading(
 
-          Obx(() {
-            if (homeController.popularCategoryList.isNotEmpty) {
-              return PopularCategory(categ: homeController.popularCategoryList);
-            } else {
-              return const PopularCategoryLoading(
+                    );
+                  }
+                }),
+                const SectionTitle(title: "Popular Category"),
 
-              );
-            }
-          }),
+                Obx(() {
+                  if (homeController.popularCategoryList.isNotEmpty) {
+                    return PopularCategory(categ: homeController.popularCategoryList);
+                  } else {
+                    return const PopularCategoryLoading(
+
+                    );
+                  }
+                }),
+                const SectionTitle(title: "Popular Product"),
+                Obx(() {
+                  if (homeController.popularProductList.isNotEmpty) {
+                    return const PopularProductLoading();
+                  } else {
+                    return const PopularProductLoading(
+
+                    );
+                  }
+                }),
+
+              ],
+            ),
+          )),
+
+
         ],
       ),
     );
