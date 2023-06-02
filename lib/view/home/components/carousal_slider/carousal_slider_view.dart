@@ -2,7 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:my_grocery/view/home/components/carousal_slider/banner_card.dart';
 
-import '../../../../model/add_banner.dart';
+import '../../../../model/ad_banner.dart';
 
 class CarouselSlideView extends StatefulWidget {
   final List<AdBanner> bannerList;

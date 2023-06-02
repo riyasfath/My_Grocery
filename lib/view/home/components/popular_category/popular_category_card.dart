@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:my_grocery/const.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../../../model/Category.dart';
+import '../../../../model/category.dart';
 
 class PopularCategoryCard extends StatelessWidget {
   final Categories category;

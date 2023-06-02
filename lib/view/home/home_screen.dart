@@ -4,11 +4,13 @@ import 'package:my_grocery/components/main_header.dart';
 import 'package:my_grocery/controller/controllers.dart';
 import 'package:my_grocery/view/home/components/carousal_slider/carousal_slider_view.dart';
 import 'package:my_grocery/view/home/components/carousal_slider/carousel_loading.dart';
-import 'package:my_grocery/view/home/components/popular_category/popular_category.dart';
-import 'package:my_grocery/view/home/components/popular_category/popular_category_loading.dart';
 import 'package:my_grocery/view/home/components/popular_product/popular_product.dart';
 import 'package:my_grocery/view/home/components/popular_product/popular_product_loading.dart';
 import 'package:my_grocery/view/home/components/section_title.dart';
+
+import 'components/popular_category/popular_category.dart';
+import 'components/popular_category/popular_category_loading.dart';
+
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -36,8 +38,8 @@ class HomeScreen extends StatelessWidget {
                 const SectionTitle(title: "Popular Category"),
 
                 Obx(() {
-                  if (homeController.popularCategoryList.isNotEmpty) {
-                    return PopularCategory(categ: homeController.popularCategoryList);
+                  if (homeController.popularCategory.isNotEmpty) {
+                    return PopularCategory(categ:homeController.popularCategory);
                   } else {
                     return const PopularCategoryLoading(
 
