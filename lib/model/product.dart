@@ -49,6 +49,6 @@ class Product{
           name: data['attributes']['name'],
           description: data['attributes']['description'],
           images: List<String>.from(data['attributes']['images']['data'].map((image)=> image['attributes']['url'])),
-          tags: List<Tag>.from(data['attributes0']['tags']['data'].map((val)=> Tag.fromJson(val)))
+          tags: List<Tag>.from(data['attributes']['tags']['data'].map((val)=> Tag.fromJson(val)))
       );
 }

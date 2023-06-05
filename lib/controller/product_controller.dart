@@ -1,6 +1,9 @@
+
+
 import 'package:get/get.dart';
 import 'package:my_grocery/model/product.dart';
-import 'package:my_grocery/services/remote_service/remote_product.dart';
+
+import '../services/remote_service/remote_product.dart';
 
 class ProductController extends GetxController{
   static ProductController instance =Get.find();
@@ -12,20 +15,18 @@ class ProductController extends GetxController{
     getProducts();
     super.onInit();
   }
-
-  void getProducts() async{
+  
+  Future<void> getProducts() async {
     try{
       isProductLoading(true);
       var result = await RemoteProductService().get();
-      if(result != null){
+      if(result  != null){
         productList.assignAll(productListFromJson(result.body));
       }
-
-
-    }
-    finally{
-      isProductLoading(false);
+    }finally{
       print(productList.length);
     }
   }
+
+  
 }
