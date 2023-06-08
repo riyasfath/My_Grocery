@@ -10,6 +10,7 @@ import 'tag.dart';
 List<Product> popularProductListFromJson(String val) => List<Product>.from(
     json.decode(val)['data']
         .map((val) => Product.popularProductFromJson(val)));
+
 List<Product> productListFromJson(String val) => List<Product>.from(
     json.decode(val)['data']
         .map((val) => Product.productFromJson(val)));
@@ -49,6 +50,6 @@ class Product{
           name: data['attributes']['name'],
           description: data['attributes']['description'],
           images: List<String>.from(data['attributes']['images']['data'].map((image)=> image['attributes']['url'])),
-          tags: List<Tag>.from(data['attributes0']['tags']['data'].map((val)=> Tag.fromJson(val)))
+          tags: List<Tag>.from(data['attributes']['tags'].map((val)=> Tag.fromJson(val)))
       );
 }

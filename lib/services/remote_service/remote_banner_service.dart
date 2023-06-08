@@ -6,9 +6,16 @@ class RemoteBannerService{
   var remoteUrl ='$baseUrl/api/banners';
   
   Future<dynamic> get() async{
-    var response = await client.get(
-      Uri.parse('$remoteUrl?populate=image')
-    );
-    return response;
+    try {
+      var response = await client.get(
+          Uri.parse('$remoteUrl?populate=image')
+
+      );
+     // print(response.body);
+      return response;
+    }
+    catch(e){
+      print(e);
+    }
   }
 }

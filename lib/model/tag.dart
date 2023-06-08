@@ -1,10 +1,9 @@
 
-import 'dart:ffi';
 
 class Tag{
   final int id;
-  late final String title;
-  final Double price;
+  final String title;
+  final double price;
 
   Tag({required this.id,required this.title,required this.price});
   

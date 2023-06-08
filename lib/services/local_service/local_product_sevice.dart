@@ -4,7 +4,7 @@ import '../../model/product.dart';
 
 
 class LocalProductService{
-  late Box<Product> _popularProductBox;
+   late Box<Product> _popularProductBox;
 
   Future<void> init() async{
     _popularProductBox = await Hive.openBox<Product>('Popular Products');

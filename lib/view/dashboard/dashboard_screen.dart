@@ -11,6 +11,7 @@ class DashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<DashboardController>(
       builder:(controller) =>  Scaffold(
+        backgroundColor: Colors.grey.shade100,
     body: SafeArea(child: IndexedStack(
       index: controller.tableIndex,
       children: [
