@@ -25,6 +25,7 @@ decoration: BoxDecoration(
               autofocus: false,
               onSubmitted: (val){
                 productController.getProductByName(keyword: val);
+                dashboardController.updateIndex(1);
 
 
               },
