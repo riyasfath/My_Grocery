@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import '../controller/controllers.dart';
 class MainHeader extends StatelessWidget {
   const MainHeader({Key? key}) : super(key: key);
 
@@ -21,8 +23,14 @@ decoration: BoxDecoration(
           Expanded(child:  Container(
             child: TextField(
               autofocus: false,
-              onSubmitted: (val){},
-              onChanged: (val){},
+              onSubmitted: (val){
+                productController.getProductByName(keyword: val);
+
+
+              },
+              onChanged: (val){
+
+              },
               decoration: InputDecoration(
                 contentPadding: const EdgeInsets.symmetric(
                   horizontal: 14,

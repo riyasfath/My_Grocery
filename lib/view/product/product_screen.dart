@@ -17,11 +17,20 @@ class ProductScreen extends StatelessWidget {
           const MainHeader(),
           Expanded(
               child: Obx((){
-            if(productController.productList.isNotEmpty){
-              return ProductGrid(products: productController.productList);
+                if(productController.isProductLoading.value){
+                  return const ProductLoadingGrid();
+                }else
+                  {
+                    if(productController.productList.isNotEmpty){
+                      return ProductGrid(products: productController.productList);
 
-            }else{
-              return const ProductLoadingGrid();
+                    }
+                    else{
+                      return const Center(
+                        child: Text('Products not found'),
+
+                      );
+                    }
 
             }
           })

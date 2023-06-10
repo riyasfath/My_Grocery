@@ -26,4 +26,21 @@ class ProductController extends GetxController {
       print(productList.length);
     }
   }
+
+  void getProductByName({required String keyword}) async{
+
+    try{
+      isProductLoading(true);
+      var result = await RemoteProductService().getByName(keyword: keyword);
+      if(result != null){
+        productList.assignAll(productListFromJson(result.body));
+      }
+    }
+
+    finally{
+      isProductLoading(false);
+      print(productList.length);
+
+    }
+  }
 }
