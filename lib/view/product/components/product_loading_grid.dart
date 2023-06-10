@@ -7,17 +7,16 @@ class ProductLoadingGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-          childAspectRatio:2/3,
+      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
           maxCrossAxisExtent: 200,
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10),
-      physics:const BouncingScrollPhysics(),
+
+          childAspectRatio: 2/3,
+          crossAxisSpacing: 10,
+          mainAxisSpacing: 10),
+      physics: const BouncingScrollPhysics(),
       padding: const EdgeInsets.all(10),
       itemCount: 6,
       itemBuilder: (context, index) => const ProductLoadingCard(),
-
-
     );
   }
 }

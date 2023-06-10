@@ -12,4 +12,6 @@ class RemoteProductService{
     );
     return response;
   }
+
+
 }

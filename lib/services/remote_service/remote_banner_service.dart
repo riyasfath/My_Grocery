@@ -3,6 +3,8 @@ import 'package:my_grocery/const.dart';
 
 class RemoteBannerService{
 
+
+
   var client = http.Client();
   var remoteUrl ='$baseUrl/api/banners';
 
@@ -12,6 +14,7 @@ class RemoteBannerService{
           Uri.parse('$remoteUrl?populate=image')
 
       );
+
      // print(response.body);
       return response;
 

@@ -13,20 +13,21 @@ class ProductLoadingCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(12),
         child: Shimmer.fromColors(
-            baseColor: Colors.grey.shade300,
-            highlightColor: Colors.white,
-            child: Column(
-              children: [
-                Flexible(
-                    flex: 5,
-                    child: Center(
-                      child: Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 20),
-                        color: Colors.grey.shade300,
-                      ),
-                    )),
-
-                Flexible(flex: 2,
+          highlightColor: Colors.white,
+          baseColor: Colors.grey.shade300,
+          child: Column(
+            children: [
+              Flexible(
+                flex: 5,
+                child: Center(
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 20),
+                    color: Colors.grey.shade300,
+                  ),
+                ),
+              ),
+              Flexible(
+                flex: 2,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,11 +42,13 @@ class ProductLoadingCard extends StatelessWidget {
                       height: 15,
                       width: 75,
                       color: Colors.grey.shade300,
-                    )
+                    ),
                   ],
-                ),)
-              ],
-            )),
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }

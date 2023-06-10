@@ -4,23 +4,23 @@ import 'package:my_grocery/view/product/components/product_card.dart';
 import '../../../model/product.dart';
 
 class ProductGrid extends StatelessWidget {
+
   final List<Product> products;
-  const ProductGrid({Key? key, required this.products }) : super(key: key);
+  const ProductGrid({Key? key, required this.products}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-          childAspectRatio:2/3,
           maxCrossAxisExtent: 200,
+
+          childAspectRatio: 2/3,
           crossAxisSpacing: 10,
           mainAxisSpacing: 10),
-      physics:const BouncingScrollPhysics(),
+      physics: const BouncingScrollPhysics(),
       padding: const EdgeInsets.all(10),
       itemCount: products.length,
-      itemBuilder: (context, index) =>  ProductCard(product: products[index]),
-
-
+      itemBuilder: (context, index) => ProductCard(product: products[index]),
     );
   }
 }

@@ -13,10 +13,13 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetailsScreen(
-          product : product
-        )));
+      onTap: () {
+        FocusScope.of(context).requestFocus(FocusNode());
+        Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => ProductDetailsScreen(
+                product: product
+            )));
       },
       child: Material(
         elevation: 8,
@@ -24,18 +27,20 @@ class ProductCard extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
         child: Padding(
-          padding:  const EdgeInsets.all(12),
+          padding: const EdgeInsets.all(12),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Flexible(
-                  flex: 5,
-                  child: Center(
+                flex: 5,
+                child: Center(
+                  child: Hero(
+                    tag: product.images.first,
                     child: CachedNetworkImage(
                       imageUrl: baseUrl + product.images.first,
                       placeholder: (context, url) => Shimmer.fromColors(
-                        baseColor: Colors.grey.shade300,
                         highlightColor: Colors.white,
+                        baseColor: Colors.grey.shade300,
                         child: Container(
                           margin: const EdgeInsets.symmetric(horizontal: 20),
                           color: Colors.grey.shade300,
@@ -48,28 +53,31 @@ class ProductCard extends StatelessWidget {
                         ),
                       ),
                     ),
-                  )),
-              const SizedBox(height: 10),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
               Flexible(
-                  flex: 2,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        product.name,
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                            color: Theme.of(context).primaryColor),
-                      ),
-                      const SizedBox(height: 5),
-                      Text(
-                        ('\$${product.tags.first.price.toStringAsFixed(2)}'),
-                        style: const TextStyle(fontSize: 12, color: Colors.grey),
-                      ),
-                    ],
-                  ))
+                flex: 2,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      product.name,
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: Theme.of(context).primaryColor),
+                    ),
+                    const SizedBox(height: 5),
+                    Text(
+                      '\$${product.tags.first.price.toStringAsFixed(2)}',
+                      style: const TextStyle(fontSize: 12, color: Colors.grey),
+                    ),
+                  ],
+                ),
+              )
             ],
           ),
         ),

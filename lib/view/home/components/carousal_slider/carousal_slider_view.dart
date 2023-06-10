@@ -39,7 +39,8 @@ class _CarouselSlideViewState extends State<CarouselSlideView> {
                 _currentIndex =index;
               });
               }
-            )),
+            )
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: widget.bannerList.map((e) {
