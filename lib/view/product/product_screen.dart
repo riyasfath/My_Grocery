@@ -13,6 +13,7 @@ class ProductScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return  SafeArea(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const MainHeader(),
           Expanded(
@@ -26,9 +27,16 @@ class ProductScreen extends StatelessWidget {
 
                     }
                     else{
-                      return const Center(
-                        child: Text('Products not found'),
+                      return Column(
 
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset('assets/product_not_found.png'),
+                          const SizedBox(height: 10),
+                          const Text('Products Not Found!'),
+                          
+                        ],
                       );
                     }
 

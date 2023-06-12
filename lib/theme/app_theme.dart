@@ -14,7 +14,7 @@ class AppTheme{
 
   const AppTheme._();
 
-  static final lighttheme =ThemeData(
+  static final lightTheme =ThemeData(
     brightness: Brightness.light,
     primaryColor: lightPrimaryColor,
     backgroundColor: lightBackgroundColor,

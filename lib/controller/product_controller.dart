@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:my_grocery/model/product.dart';
 
@@ -5,6 +6,8 @@ import '../services/remote_service/remote_product.dart';
 
 class ProductController extends GetxController {
   static ProductController instance = Get.find();
+  TextEditingController searchTextEditController = TextEditingController();
+  RxString searchVal = ''.obs;
   RxList<Product> productList = List<Product>.empty(growable: true).obs;
   RxBool isProductLoading = false.obs;
 
@@ -27,20 +30,29 @@ class ProductController extends GetxController {
     }
   }
 
-  void getProductByName({required String keyword}) async{
-
-    try{
+  void getProductByName({required String keyword}) async {
+    try {
       isProductLoading(true);
       var result = await RemoteProductService().getByName(keyword: keyword);
       if(result != null){
         productList.assignAll(productListFromJson(result.body));
       }
-    }
-
-    finally{
+    } finally {
       isProductLoading(false);
       print(productList.length);
+    }
+  }
 
+  void getProductByCategory({required int id}) async {
+    try {
+      isProductLoading(true);
+      var result = await RemoteProductService().getByCategory(id: id);
+      if(result != null){
+        productList.assignAll(productListFromJson(result.body));
+      }
+    } finally {
+      isProductLoading(false);
+      print(productList.length);
     }
   }
 }

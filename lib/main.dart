@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
 getPages:  AppPage.list,
       initialRoute: AppRoute.dashboard,
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.lighttheme,
+      theme: AppTheme.lightTheme,
       themeMode: ThemeMode.light,
 
 

@@ -2,9 +2,16 @@ import 'dart:convert';
 import 'package:hive/hive.dart';
 
 part 'category.g.dart';
-List<Categories> popularCategoryFromJson(String val) => List<Categories>.from(json
+
+List<Categories> popularCategoryFromJson(String val) =>
+    List<Categories>.from(json
+        .decode(val)['data']
+        .map((category) => Categories.popularCategoryFromJson(category)));
+
+List<Categories> categoryListFromJson(String val) => List<Categories>.from(json
     .decode(val)['data']
-    .map((category) => Categories.popularCategoryFromJson(category)));
+    .map((category) => Categories.categoryFromJson(category)));
+
 @HiveType(typeId: 2)
 class Categories {
   @HiveField(0)
@@ -21,6 +28,10 @@ class Categories {
           id: data['id'],
           name: data['attributes']['category']['data']['attributes']['name'],
           image: data['attributes']['category']['data']['attributes']['image']
-          ['data']['attributes']['url']);
-}
+              ['data']['attributes']['url']);
 
+  factory Categories.categoryFromJson(Map<String, dynamic> data) => Categories(
+      id: data['id'],
+      name: data['attributes']['name'],
+      image: data['attributes']['image']['data']['attributes']['url']);
+}
