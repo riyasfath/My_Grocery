@@ -1,24 +1,14 @@
-import 'package:http/http.dart'as http;
+import 'package:http/http.dart' as http;
 import 'package:my_grocery/const.dart';
 
-class RemoteBannerService{
-
-
-
+class RemoteBannerService {
   var client = http.Client();
-  var remoteUrl ='$baseUrl/api/banners';
+  var remoteUrl = '$baseUrl/api/banners';
 
-  Future<dynamic> get() async{
+  Future<dynamic> get() async {
+    var response = await client.get(Uri.parse('$remoteUrl?populate=image'));
 
-      var response = await client.get(
-          Uri.parse('$remoteUrl?populate=image')
-
-      );
-
-     // print(response.body);
-      return response;
-
-
-
+    // print(response.body);
+    return response;
   }
 }

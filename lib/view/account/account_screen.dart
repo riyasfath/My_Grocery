@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
-import 'package:my_grocery/view/account/auth/sign_in_screen.dart';
+import 'package:get/get.dart';
+import 'package:my_grocery/controller/controllers.dart';
+
+import 'auth/sign_in_screen.dart';
 
 class AccountScreen extends StatelessWidget {
   const AccountScreen({Key? key}) : super(key: key);
@@ -13,9 +15,9 @@ class AccountScreen extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         children: [
           const SizedBox(height: 20),
-          Row(
+          Obx(()=> Row(
             children: [
-              CircleAvatar(
+              const CircleAvatar(
                 backgroundColor: Colors.grey,
                 radius: 36,
                 child: CircleAvatar(
@@ -23,32 +25,41 @@ class AccountScreen extends StatelessWidget {
                   backgroundImage: AssetImage("assets/user_image.png"),
                 ),
               ),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               Column(
-                children: [
+                children:  [
                   Text(
-                    "Sign in your account",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                    authController.user.value?.fullName??"Sign in your account",
+                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                   )
                 ],
               )
             ],
-          ),
+          ),),
           const SizedBox(height: 50),
           buildAccountCard(
-              title: 'Profile Info',
+              title: "Profile Info",
               onClick: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const SignInScreen(),
-                    ));
+                        builder: (context) => const SignInScreen()));
               }),
-          buildAccountCard(title: 'Notification', onClick: () {}),
-          buildAccountCard(title: 'Settings', onClick: () {}),
-          buildAccountCard(title: 'About Us', onClick: () {}),
-          buildAccountCard(title: 'Terms of Service', onClick: () {}),
-          buildAccountCard(title: 'Sign In', onClick: () {})
+          buildAccountCard(title: "Notification", onClick: () {}),
+          buildAccountCard(title: "Settings", onClick: () {}),
+          buildAccountCard(title: "About Us", onClick: () {}),
+          buildAccountCard(title: "Terms of Service", onClick: () {}),
+          Obx(() => buildAccountCard(title: authController.user.value==null?"Sign In":
+          "Sign Out", onClick: () {
+            if(authController.user.value!=null){
+              authController.signOut();
+            } else {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const SignInScreen()));
+            }
+          }))
         ],
       ),
     );
@@ -81,7 +92,7 @@ class AccountScreen extends StatelessWidget {
               Text(
                 title,
                 style:
-                    const TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
+                const TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
               ),
               const Icon(Icons.keyboard_arrow_right_outlined)
             ],
