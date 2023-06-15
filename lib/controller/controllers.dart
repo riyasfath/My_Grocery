@@ -12,4 +12,4 @@ DashboardController dashboardController = DashboardController.instance;
 
 CategoryController categoryController = CategoryController.instance;
 
-AuthController authController = AuthController.instance;
+// AuthController authController = AuthController.instance;
