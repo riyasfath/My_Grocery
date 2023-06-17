@@ -16,6 +16,9 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
 
+
+
+
   //register adapters hive
   
   Hive.registerAdapter(AdBannerAdapter());
@@ -65,5 +68,8 @@ void configLoading(){
     ..maskType = EasyLoadingMaskType.black
     ..dismissOnTap = false;
 }
+
+
+
 
 

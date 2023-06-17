@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_grocery/controller/controllers.dart';
 import 'package:my_grocery/extention/string_extention.dart';
+import 'package:my_grocery/view/account/auth/forget_password.dart';
+import 'package:my_grocery/view/home/home_screen.dart';
 
 import '../../../components/input_ outline_button.dart';
 import '../../../components/input_text_button.dart';
@@ -84,7 +86,9 @@ class _SignInScreenState extends State<SignInScreen> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     InkWell(
-                      onTap: (){},
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (ctx)=> ForgetPassword()));
+                      },
                       child: const Text(
                         "Forgot Password",
                         style: TextStyle(fontSize: 12),
@@ -92,9 +96,10 @@ class _SignInScreenState extends State<SignInScreen> {
                     )
                   ],
                 ),
-                const Spacer(),
+                 Spacer(),
                 InputTextButton(
                   title: "Sign In", onClick: (){
+
                   if(_formKey.currentState!.validate()){
                     authController.signIn(email: emailController.text, password: passwordController.text);
                   }

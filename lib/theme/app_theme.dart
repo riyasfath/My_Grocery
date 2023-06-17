@@ -16,7 +16,7 @@ class AppTheme{
 
   static final lightTheme =ThemeData(
     brightness: Brightness.light,
-    primaryColor:Colors.cyan ,
+    primaryColor:Colors.orange ,
     backgroundColor: lightBackgroundColor,
     visualDensity: VisualDensity.adaptivePlatformDensity,
     appBarTheme: AppBarTheme(backgroundColor: lightPrimaryColor),
