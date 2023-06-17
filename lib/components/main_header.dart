@@ -91,18 +91,18 @@ decoration: BoxDecoration(
                   ]
               ),
               padding: const EdgeInsets.all(12),
-              // child: const Icon(Icons.shopping_cart_outlined,
-              //   color: Colors.grey,),
+              child: const Icon(Icons.shopping_cart_outlined,
+                color: Colors.grey,),
 
-              child: IconButton(
-                icon: Icon(Icons.shopping_cart_outlined,
-                color: Colors.grey),
-                onPressed: () { 
-                  Navigator.push(context, MaterialPageRoute(builder: (ctx) => CartScreen()));
-                },
-                
-
-              ),
+              // child: IconButton(
+              //   icon: Icon(Icons.shopping_cart_outlined,
+              //   color: Colors.grey),
+              //   onPressed: () {
+              //     Navigator.push(context, MaterialPageRoute(builder: (ctx) => CartScreen()));
+              //   },
+              //
+              //
+              // ),
 
             ),
           ),
