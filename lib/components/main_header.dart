@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_grocery/view/cart/cart_screen.dart';
+import 'package:my_grocery/view/cart/cart_helper.dart';
 
 import '../controller/controllers.dart';
 class MainHeader extends StatelessWidget {
@@ -98,7 +98,7 @@ decoration: BoxDecoration(
                 icon: Icon(Icons.shopping_cart_outlined,
                 color: Colors.grey),
                 onPressed: () { 
-                  Navigator.push(context, MaterialPageRoute(builder: (ctx) => CartScreen()));
+                  // Navigator.push(context, MaterialPageRoute(builder: (ctx) => CartScreen()));
                 },
                 
 

@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:my_grocery/model/cartModel.dart';
+import 'package:my_grocery/view/cart/cart_helper.dart';
+import 'package:my_grocery/view/cart/cart_screen.dart';
 
 import '../../model/product.dart';
+
 import 'components/product_carousel_slider.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   final Product product;
+
   const ProductDetailsScreen({Key? key, required this.product})
       : super(key: key);
 
@@ -17,6 +22,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   NumberFormat formatter = NumberFormat('00');
   int _qty = 1;
   int _tagIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +63,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     decoration: BoxDecoration(
                         border: Border.all(width: 1),
                         borderRadius:
-                        const BorderRadius.all(Radius.circular(8))),
+                            const BorderRadius.all(Radius.circular(8))),
                     child: Row(
                       children: [
                         InkWell(
@@ -99,7 +105,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     decoration: BoxDecoration(
                         border: Border.all(width: 1),
                         borderRadius:
-                        const BorderRadius.all(Radius.circular(8))),
+                            const BorderRadius.all(Radius.circular(8))),
                     child: Row(
                       children: [
                         InkWell(
@@ -167,10 +173,28 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         child: TextButton(
           style: ButtonStyle(
             foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-            backgroundColor:
-            MaterialStateProperty.all<Color>(Theme.of(context).primaryColor),
+            backgroundColor: MaterialStateProperty.all<Color>(
+                Theme.of(context).primaryColor),
           ),
-          onPressed: () {},
+          onPressed: () async {
+            final cart = CartModel(
+                img: widget.product.images.first,
+                name: widget.product.name,
+                price: widget.product.tags.first.price,
+                qty: 1);
+            // final cart = CartModel(
+            //     im:'asd',
+            //     name:'s',
+            //     price:3 ,
+            //     quantity: 1);
+            // print(cart.image);
+            // print(cart.name);
+            // print(cart.price);
+            await CartHelper().addToCart(cart);
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return const Cart();
+            }));
+          },
           child: const Padding(
             padding: EdgeInsets.all(6.0),
             child: Text(
