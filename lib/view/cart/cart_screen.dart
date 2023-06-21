@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../../model/cartModel.dart';
@@ -15,8 +14,6 @@ int counter = 0;
 
 class _CartState extends State<Cart> {
   List<CartModel> cartItems = [];
-
-
 
   void initState() {
     getCartItems();
@@ -48,15 +45,12 @@ class _CartState extends State<Cart> {
                 children: [
                   Expanded(
                     child: Text(
-                      "Name",
+                      "Products",
                       style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                           letterSpacing: 1),
                     ),
-                  ),
-                  SizedBox(
-                    width: 15,
                   ),
                   Text("qty"),
                   SizedBox(
@@ -67,104 +61,69 @@ class _CartState extends State<Cart> {
                     width: 10,
                   ),
                   SizedBox(
-                    width: 60,
+                    width: 20,
                   ),
                 ],
               ),
             ),
             Expanded(
+
               child: SizedBox(
                 child: ListView.builder(
                   itemCount: cartItems.length,
                   itemBuilder: (context, index) {
                     final cartItem = cartItems[index];
-                    return Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 15),
-                      child: Row(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(20),
-                            child: Image.network(
-                              cartItem.img,
-                              height: 100,
-                              width: 100,
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Expanded(
-                            child: Text(cartItem.name ?? ""),
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Text("${cartItem.qty}"),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Text("${cartItem.price}"),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          SizedBox(
-                            width: 60,
-                            child: Row(
-                              children: [
-                                InkWell(
-                                  onTap: () async {
-                                    final cart = CartModel(
-                                      img: cartItem.img,
-                                      name: cartItem.name,
-                                      price: cartItem.price! - cartItem.price!,
-                                      qty: -1,
-                                    );
-                                    await CartHelper().addToCart(cart);
-                                    getCartItems();
-                                  },
-                                  child: const CircleAvatar(
-                                    radius: 10,
-                                    child: Center(
-                                        child: Icon(
-                                          Icons.remove,
-                                          size: 15,
-                                        )),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 8,
-                                ),
-                                InkWell(
-                                  onTap: () async {
-                                    final cart = CartModel(
-                                      img: cartItem.img,
-                                      name: cartItem.name,
-                                      price: cartItem.price! + cartItem.price!,
-                                      qty: 1,
-                                    );
-                                    await CartHelper().addToCart(cart);
-                                    getCartItems();
-                                  },
-                                  child: const CircleAvatar(
-                                    radius: 10,
-                                    child: Center(
-                                        child: Icon(
-                                          Icons.add,
-                                          size: 15,
-                                        )),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
+                    return ListTile(
+                      leading: CircleAvatar(
+                        foregroundImage: NetworkImage(cartItem.img.toString()),
+                        backgroundImage: NetworkImage(cartItem.img),
+
                       ),
+
+                      title: Text(cartItem.name ?? ""),
+
+
+
+
+
+
                     );
+
+
                   },
                 ),
+
               ),
             ),
+            Expanded(
+
+              child: SizedBox(
+                child: ListView.builder(
+                  itemCount: cartItems.length,
+                  itemBuilder: (context, index) {
+                    final cartItem = cartItems[index];
+                    return ListTile(
+                      leading: CircleAvatar(
+                        child: Text(cartItem.price.toString()),
+
+                      ),
+
+                      title: Text(cartItem.qty.toString()),
+
+
+
+
+
+
+                    );
+
+
+                  },
+                ),
+
+              ),
+            ),
+
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -186,7 +145,7 @@ class _CartState extends State<Cart> {
                     child: ElevatedButton(
                       style: ButtonStyle(
                           backgroundColor: MaterialStatePropertyAll<Color>(
-                              Colors.orange.shade300)),
+                              Colors.orange)),
                       onPressed: () {
                         setState(() {
                           // ShowAlert();
