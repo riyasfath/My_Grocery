@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../model/cartModel.dart';
 import 'cart_helper.dart';
@@ -37,6 +38,8 @@ class _CartState extends State<Cart> {
             style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
           ),
         ),
+
+
         body: Column(
           children: [
             Container(
@@ -81,35 +84,16 @@ class _CartState extends State<Cart> {
                       ),
 
                       title: Text(cartItem.name ?? ""),
-
-
-
-
-
-
-                    );
-
-
-                  },
-                ),
-
-              ),
-            ),
-            Expanded(
-
-              child: SizedBox(
-                child: ListView.builder(
-                  itemCount: cartItems.length,
-                  itemBuilder: (context, index) {
-                    final cartItem = cartItems[index];
-                    return ListTile(
-                      leading: CircleAvatar(
-                        child: Text(cartItem.price.toString()),
-
+                      trailing:  Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(cartItem.qty.toString()),
+                          Icon(Icons.check_circle, color: Colors.green), //
+                          Text(cartItem.price.toString()),
+                          Icon(Icons.check_circle, color: Colors.green), // // Example status icon
+                        ],
                       ),
 
-                      title: Text(cartItem.qty.toString()),
-
 
 
 
@@ -123,8 +107,36 @@ class _CartState extends State<Cart> {
 
               ),
             ),
-
-            Row(
+            // Expanded(
+            //
+            //   child: SizedBox(
+            //     child: ListView.builder(
+            //       itemCount: cartItems.length,
+            //       itemBuilder: (context, index) {
+            //         final cartItem = cartItems[index];
+            //         return ListTile(
+            //           leading: CircleAvatar(
+            //             child: Text(cartItem.price.toString()),
+            //
+            //           ),
+            //
+            //           title: Text(cartItem.qty.toString()),
+            //
+            //
+            //
+            //
+            //
+            //
+            //         );
+            //
+            //
+            //       },
+            //     ),
+            //
+            //   ),
+            // ),
+            //
+             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 CircleAvatar(
@@ -147,10 +159,29 @@ class _CartState extends State<Cart> {
                           backgroundColor: MaterialStatePropertyAll<Color>(
                               Colors.orange)),
                       onPressed: () {
+
+                        void showToast(String message) {
+                          Fluttertoast.showToast(
+                            msg: message,
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor: Colors.orange,
+                            textColor: Colors.white,
+                            fontSize: 16.0,
+                          );
+                        }
+            //
+            //
+            //
                         setState(() {
-                          // ShowAlert();
-                        });
+                          showToast("This Option is not working");
+                        },
+            //
+            //
+                        );
                       },
+
                       child: const Text(
                         "Book now",
                         style: TextStyle(
@@ -168,5 +199,7 @@ class _CartState extends State<Cart> {
         ),
       ),
     );
+
   }
+
 }

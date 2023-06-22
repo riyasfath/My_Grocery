@@ -5,9 +5,23 @@ import 'package:my_grocery/model/cartModel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CartHelper {
+
+  // Future<void> removeCartItem(String itemId) async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   final cartData = prefs.getStringList(_cartKey);
+  //
+  //   if(cartData != null){
+  //     final UpdatedCartData =cartData.where((itemJson) => jsonDecode(itemJson)['id'] != itemId).toList();
+  //   }
+  // }
+
   Future addToCart(CartModel cart) async {
     final prefs = await SharedPreferences.getInstance();
     final list = await getCartItems();
+
+
+
+
     for (var i = 0; i < list.length; i++) {
       var element = list[i];
       if (element.name == cart.name) {
@@ -37,4 +51,6 @@ class CartHelper {
     final list = jsonDecode(data);
     return (list as List).map((e) => CartModel.fromJson(e)).toList();
   }
+
+
 }
