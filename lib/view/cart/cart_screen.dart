@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../../model/cartModel.dart';
@@ -134,9 +133,9 @@ class _CartState extends State<Cart> {
                                     radius: 10,
                                     child: Center(
                                         child: Icon(
-                                          Icons.remove,
-                                          size: 15,
-                                        )),
+                                      Icons.remove,
+                                      size: 15,
+                                    )),
                                   ),
                                 ),
                                 const SizedBox(
@@ -157,9 +156,9 @@ class _CartState extends State<Cart> {
                                     radius: 10,
                                     child: Center(
                                         child: Icon(
-                                          Icons.add,
-                                          size: 15,
-                                        )),
+                                      Icons.add,
+                                      size: 15,
+                                    )),
                                   ),
                                 ),
                               ],
@@ -172,46 +171,73 @@ class _CartState extends State<Cart> {
                 ),
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                CircleAvatar(
-                  radius: 25,
-                  backgroundColor: Colors.grey.shade300,
-                  child: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.add_shopping_cart_rounded,
-                        color: Colors.orange,
-                      )),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: SizedBox(
-                    height: 60,
-                    width: 300,
-                    child: ElevatedButton(
-                      style: const ButtonStyle(
-                          backgroundColor: MaterialStatePropertyAll<Color>(
-                              Colors.orange)),
-                      onPressed: () {
-                        setState(() {
-                          // ShowAlert();
-                        });
-                      },
-                      child: const Text(
-                        "Buy Now",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 1),
-                      ),
+
+            Container(
+              color: Colors.grey[200],
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.blue,
+                      textStyle: const TextStyle(color: Colors.white),
                     ),
+                    child: const Text("Move to Wishlist"),
                   ),
-                ),
-              ],
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.green,
+                      textStyle: const TextStyle(color: Colors.white),
+                    ),
+                    child: const Text('Buy NOw'),
+                  ),
+                ],
+              ),
             )
+
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            //   children: [
+            //     CircleAvatar(
+            //       radius: 25,
+            //       backgroundColor: Colors.grey.shade300,
+            //       child: IconButton(
+            //           onPressed: () {},
+            //           icon: const Icon(
+            //             Icons.add_shopping_cart_rounded,
+            //             color: Colors.orange,
+            //           )),
+            //     ),
+            //     Padding(
+            //       padding: const EdgeInsets.all(10),
+            //       child: SizedBox(
+            //         height: 60,
+            //         width: 300,
+            //         child: ElevatedButton(
+            //           style: const ButtonStyle(
+            //               backgroundColor: MaterialStatePropertyAll<Color>(
+            //                   Colors.orange)),
+            //           onPressed: () {
+            //             setState(() {
+            //               // ShowAlert();
+            //             });
+            //           },
+            //           child: const Text(
+            //             "Buy Now",
+            //             style: TextStyle(
+            //                 color: Colors.white,
+            //                 fontSize: 20,
+            //                 fontWeight: FontWeight.bold,
+            //                 letterSpacing: 1),
+            //           ),
+            //         ),
+            //       ),
+            //     ),
+            //   ],
+            // )
           ],
         ),
       ),
