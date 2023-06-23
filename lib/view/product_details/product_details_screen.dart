@@ -181,7 +181,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 img: widget.product.images.first,
                 name: widget.product.name,
                 price: widget.product.tags.first.price,
-                qty: 1);
+                qty: 1,);
             // final cart = CartModel(
             //     im:'asd',
             //     name:'s',

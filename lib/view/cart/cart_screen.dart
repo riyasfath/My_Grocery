@@ -1,5 +1,5 @@
+
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../model/cartModel.dart';
 import 'cart_helper.dart';
@@ -15,6 +15,15 @@ int counter = 0;
 
 class _CartState extends State<Cart> {
   List<CartModel> cartItems = [];
+
+  // @override
+  // void ShowAlert() {
+  //   QuickAlert.show(
+  //       context: context,
+  //       type: cartItems.isEmpty
+  //           ? QuickAlertType.warning
+  //           : QuickAlertType.success);
+  // }
 
   void initState() {
     getCartItems();
@@ -38,8 +47,6 @@ class _CartState extends State<Cart> {
             style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
           ),
         ),
-
-
         body: Column(
           children: [
             Container(
@@ -48,12 +55,15 @@ class _CartState extends State<Cart> {
                 children: [
                   Expanded(
                     child: Text(
-                      "Products",
+                      "Name",
                       style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                           letterSpacing: 1),
                     ),
+                  ),
+                  SizedBox(
+                    width: 15,
                   ),
                   Text("qty"),
                   SizedBox(
@@ -64,79 +74,105 @@ class _CartState extends State<Cart> {
                     width: 10,
                   ),
                   SizedBox(
-                    width: 20,
+                    width: 60,
                   ),
                 ],
               ),
             ),
             Expanded(
-
               child: SizedBox(
                 child: ListView.builder(
                   itemCount: cartItems.length,
                   itemBuilder: (context, index) {
                     final cartItem = cartItems[index];
-                    return ListTile(
-                      leading: CircleAvatar(
-                        foregroundImage: NetworkImage(cartItem.img.toString()),
-                        backgroundImage: NetworkImage(cartItem.img),
-
-                      ),
-
-                      title: Text(cartItem.name ?? ""),
-                      trailing:  Row(
-                        mainAxisSize: MainAxisSize.min,
+                    return Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 15),
+                      child: Row(
                         children: [
-                          Text(cartItem.qty.toString()),
-                          Icon(Icons.check_circle, color: Colors.green), //
-                          Text(cartItem.price.toString()),
-                          Icon(Icons.check_circle, color: Colors.green), // // Example status icon
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            //  child: Image.network(
+                            //   cartItem.img,
+                            //    height: 100,
+                            //    width: 100,
+                            // ),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Expanded(
+                            child: Text(cartItem.name ?? ""),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Text("${cartItem.qty}"),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Text("${cartItem.price}"),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          SizedBox(
+                            width: 60,
+                            child: Row(
+                              children: [
+                                InkWell(
+                                  onTap: () async {
+                                    final cart = CartModel(
+                                      img: cartItem.img,
+                                      name: cartItem.name,
+                                      price: cartItem.price! - cartItem.price!,
+                                      qty: -1,
+                                    );
+                                    await CartHelper().addToCart(cart);
+                                    getCartItems();
+                                  },
+                                  child: const CircleAvatar(
+                                    radius: 10,
+                                    child: Center(
+                                        child: Icon(
+                                          Icons.remove,
+                                          size: 15,
+                                        )),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 8,
+                                ),
+                                InkWell(
+                                  onTap: () async {
+                                    final cart = CartModel(
+                                      img: cartItem.img,
+                                      name: cartItem.name,
+                                      price: cartItem.price! + cartItem.price!,
+                                      qty: 1,
+                                    );
+                                    await CartHelper().addToCart(cart);
+                                    getCartItems();
+                                  },
+                                  child: const CircleAvatar(
+                                    radius: 10,
+                                    child: Center(
+                                        child: Icon(
+                                          Icons.add,
+                                          size: 15,
+                                        )),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         ],
                       ),
-
-
-
-
-
-
                     );
-
-
                   },
                 ),
-
               ),
             ),
-            // Expanded(
-            //
-            //   child: SizedBox(
-            //     child: ListView.builder(
-            //       itemCount: cartItems.length,
-            //       itemBuilder: (context, index) {
-            //         final cartItem = cartItems[index];
-            //         return ListTile(
-            //           leading: CircleAvatar(
-            //             child: Text(cartItem.price.toString()),
-            //
-            //           ),
-            //
-            //           title: Text(cartItem.qty.toString()),
-            //
-            //
-            //
-            //
-            //
-            //
-            //         );
-            //
-            //
-            //       },
-            //     ),
-            //
-            //   ),
-            // ),
-            //
-             Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 CircleAvatar(
@@ -144,9 +180,9 @@ class _CartState extends State<Cart> {
                   backgroundColor: Colors.grey.shade300,
                   child: IconButton(
                       onPressed: () {},
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.add_shopping_cart_rounded,
-                        color: Colors.orange.shade300,
+                        color: Colors.orange,
                       )),
                 ),
                 Padding(
@@ -155,35 +191,16 @@ class _CartState extends State<Cart> {
                     height: 60,
                     width: 300,
                     child: ElevatedButton(
-                      style: ButtonStyle(
+                      style: const ButtonStyle(
                           backgroundColor: MaterialStatePropertyAll<Color>(
                               Colors.orange)),
                       onPressed: () {
-
-                        void showToast(String message) {
-                          Fluttertoast.showToast(
-                            msg: message,
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.BOTTOM,
-                            timeInSecForIosWeb: 1,
-                            backgroundColor: Colors.orange,
-                            textColor: Colors.white,
-                            fontSize: 16.0,
-                          );
-                        }
-            //
-            //
-            //
                         setState(() {
-                          showToast("This Option is not working");
-                        },
-            //
-            //
-                        );
+                          // ShowAlert();
+                        });
                       },
-
                       child: const Text(
-                        "Book now",
+                        "Buy Now",
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 20,
@@ -199,7 +216,5 @@ class _CartState extends State<Cart> {
         ),
       ),
     );
-
   }
-
 }
