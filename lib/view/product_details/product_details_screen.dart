@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:my_grocery/model/cartModel.dart';
 import 'package:my_grocery/view/cart/cart_helper.dart';
@@ -10,8 +11,9 @@ import 'components/product_carousel_slider.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   final Product product;
+  final VoidCallback onLongPress;
 
-  const ProductDetailsScreen({Key? key, required this.product})
+  const ProductDetailsScreen({Key? key, required this.product, required this.onLongPress})
       : super(key: key);
 
   @override
@@ -22,6 +24,16 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   NumberFormat formatter = NumberFormat('00');
   int _qty = 1;
   int _tagIndex = 0;
+
+  void showToast(){
+    Fluttertoast.showToast(msg: "Item added successfully",
+    toastLength: Toast.LENGTH_SHORT,
+    gravity: ToastGravity.CENTER,
+    timeInSecForIosWeb: 1,
+    backgroundColor: Colors.grey[800],
+    textColor: Colors.white,
+    fontSize: 16.0);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,11 +50,13 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Text(
                 widget.product.name,
+
                 style: TextStyle(
                     fontSize: 24,
                     color: Theme.of(context).primaryColor,
                     fontWeight: FontWeight.w600),
               ),
+
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -54,6 +68,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     fontWeight: FontWeight.w400),
               ),
             ),
+
             const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -177,24 +192,24 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 Theme.of(context).primaryColor),
           ),
           onPressed: () async {
+
+            showToast();
+
             final cart = CartModel(
                 img: widget.product.images.first,
                 name: widget.product.name,
+
                 price: widget.product.tags.first.price,
-                qty: 1,);
-            // final cart = CartModel(
-            //     im:'asd',
-            //     name:'s',
-            //     price:3 ,
-            //     quantity: 1);
-            // print(cart.image);
-            // print(cart.name);
-            // print(cart.price);
-            await CartHelper().addToCart(cart);
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return const Cart();
-            }));
+                qty: _qty,);
+
+            await CartHelper().addToCart(cart,cartKey);
+
+            // Navigator.push(context, MaterialPageRoute(builder: (context) {
+            //   return const Cart();
+            // }
+            // ));
           },
+
           child: const Padding(
             padding: EdgeInsets.all(6.0),
             child: Text(
@@ -204,6 +219,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           ),
         ),
       ),
+
+
     );
+
   }
 }

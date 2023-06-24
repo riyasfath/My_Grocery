@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_grocery/view/cart/wishListScreen.dart';
 
 import '../../model/cartModel.dart';
 import 'cart_helper.dart';
@@ -13,16 +14,9 @@ class Cart extends StatefulWidget {
 int counter = 0;
 
 class _CartState extends State<Cart> {
-  List<CartModel> cartItems = [];
+  String selectedOption = '';
 
-  // @override
-  // void ShowAlert() {
-  //   QuickAlert.show(
-  //       context: context,
-  //       type: cartItems.isEmpty
-  //           ? QuickAlertType.warning
-  //           : QuickAlertType.success);
-  // }
+  List<CartModel> cartItems = [];
 
   void initState() {
     getCartItems();
@@ -30,7 +24,7 @@ class _CartState extends State<Cart> {
   }
 
   Future getCartItems() async {
-    cartItems = await CartHelper().getCartItems();
+    cartItems = await CartHelper().getCartItems(cartKey);
     setState(() {});
   }
 
@@ -83,88 +77,106 @@ class _CartState extends State<Cart> {
                 child: ListView.builder(
                   itemCount: cartItems.length,
                   itemBuilder: (context, index) {
+                    bool isSelected = cartItems[index].selected;
                     final cartItem = cartItems[index];
-                    return Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 15),
-                      child: Row(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(20),
-                            //  child: Image.network(
-                            //   cartItem.img,
-                            //    height: 100,
-                            //    width: 100,
-                            // ),
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Expanded(
-                            child: Text(cartItem.name ?? ""),
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Text("${cartItem.qty}"),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Text("${cartItem.price}"),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          SizedBox(
-                            width: 60,
-                            child: Row(
-                              children: [
-                                InkWell(
-                                  onTap: () async {
-                                    final cart = CartModel(
-                                      img: cartItem.img,
-                                      name: cartItem.name,
-                                      price: cartItem.price! - cartItem.price!,
-                                      qty: -1,
-                                    );
-                                    await CartHelper().addToCart(cart);
-                                    getCartItems();
-                                  },
-                                  child: const CircleAvatar(
-                                    radius: 10,
-                                    child: Center(
-                                        child: Icon(
-                                      Icons.remove,
-                                      size: 15,
-                                    )),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 8,
-                                ),
-                                InkWell(
-                                  onTap: () async {
-                                    final cart = CartModel(
-                                      img: cartItem.img,
-                                      name: cartItem.name,
-                                      price: cartItem.price! + cartItem.price!,
-                                      qty: 1,
-                                    );
-                                    await CartHelper().addToCart(cart);
-                                    getCartItems();
-                                  },
-                                  child: const CircleAvatar(
-                                    radius: 10,
-                                    child: Center(
-                                        child: Icon(
-                                      Icons.add,
-                                      size: 15,
-                                    )),
-                                  ),
-                                ),
-                              ],
+
+                    return InkWell(
+                      onTap: () {
+                        setState(() {
+                          cartItems[index].selected = !isSelected;
+                        });
+                      },
+                      child: Container(
+                        color: isSelected ? Colors.green : null,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 15),
+                        child: Row(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              //   child: Image.network(
+                              //    cartItem.img,
+                              //    height: 100,
+                              //    width: 100,
+                              // ),
                             ),
-                          ),
-                        ],
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Expanded(
+                              child: Text(
+                                cartItem.name ?? "",
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Text("${cartItem.qty}"),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Text("${cartItem.price}"),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            SizedBox(
+                              width: 60,
+                              child: Row(
+                                children: [
+                                  InkWell(
+                                    onTap: () async {
+                                      final cart = CartModel(
+                                        img: cartItem.img,
+                                        name: cartItem.name,
+                                        price:
+                                            cartItem.price! - cartItem.price!,
+                                        qty: -1,
+                                      );
+                                      await CartHelper().addToCart(cart,cartKey);
+                                      getCartItems();
+                                    },
+                                    child: const CircleAvatar(
+                                      radius: 10,
+                                      child: Center(
+                                          child: Icon(
+                                        Icons.remove,
+                                        size: 15,
+                                      )),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 8,
+                                  ),
+                                  InkWell(
+                                    onTap: () async {
+                                      setState(() {
+                                        cartItems[index].selected =
+                                            !cartItems[index].selected;
+                                      });
+                                      final cart = CartModel(
+                                        img: cartItem.img,
+                                        name: cartItem.name,
+                                        price:
+                                            cartItem.price! + cartItem.price!,
+                                        qty: 1,
+                                      );
+                                      await CartHelper().addToCart(cart,cartKey);
+                                      getCartItems();
+                                    },
+                                    child: const CircleAvatar(
+                                      radius: 10,
+                                      child: Center(
+                                          child: Icon(
+                                        Icons.add,
+                                        size: 15,
+                                      )),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     );
                   },
@@ -179,7 +191,10 @@ class _CartState extends State<Cart> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => WishListScreen()));
+                    },
                     style: ElevatedButton.styleFrom(
                       primary: Colors.blue,
                       textStyle: const TextStyle(color: Colors.white),

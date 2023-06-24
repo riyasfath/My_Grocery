@@ -18,7 +18,7 @@ class ProductCard extends StatelessWidget {
         Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => ProductDetailsScreen(
-                product: product
+                product: product, onLongPress: () {  },
             )));
       },
       child: Material(
