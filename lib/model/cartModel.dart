@@ -3,14 +3,14 @@ class CartModel {
   String? name;
   int? qty;
   double? price;
-  bool selected;
+
 
   CartModel({
     required this.img,
     this.name,
     this.qty,
     this.price,
-    this.selected = false,
+
   });
 
   factory CartModel.fromJson(json) {

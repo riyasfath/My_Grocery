@@ -17,6 +17,7 @@ class _CartState extends State<Cart> {
   String selectedOption = '';
 
   List<CartModel> cartItems = [];
+  List<CartModel> wishItems = [];
 
   void initState() {
     getCartItems();
@@ -24,7 +25,7 @@ class _CartState extends State<Cart> {
   }
 
   Future getCartItems() async {
-    cartItems = await CartHelper().getCartItems(cartKey);
+    cartItems = await CartHelper().getCartItems();
     setState(() {});
   }
 
@@ -77,17 +78,27 @@ class _CartState extends State<Cart> {
                 child: ListView.builder(
                   itemCount: cartItems.length,
                   itemBuilder: (context, index) {
-                    bool isSelected = cartItems[index].selected;
                     final cartItem = cartItems[index];
 
                     return InkWell(
                       onTap: () {
-                        setState(() {
-                          cartItems[index].selected = !isSelected;
-                        });
+                        wishItems.any((item) =>
+                        item.name ==
+                            cartItem.name)
+
+                        ?  wishItems.removeWhere((element) =>
+                        element.name ==
+                            cartItem.name) :wishItems.add(cartItems[index]);
+
+
+                        print('asdddddddd'+wishItems.length.toString());
+                        setState(() {});
                       },
                       child: Container(
-                        color: isSelected ? Colors.green : null,
+                        color:
+                        wishItems.any((item) =>
+                        item.name ==
+                            cartItem.name) ? Colors.green : null,
                         padding: const EdgeInsets.symmetric(
                             horizontal: 10, vertical: 15),
                         child: Row(
@@ -132,7 +143,7 @@ class _CartState extends State<Cart> {
                                             cartItem.price! - cartItem.price!,
                                         qty: -1,
                                       );
-                                      await CartHelper().addToCart(cart,cartKey);
+                                      await CartHelper().addToCart(cart);
                                       getCartItems();
                                     },
                                     child: const CircleAvatar(
@@ -149,10 +160,10 @@ class _CartState extends State<Cart> {
                                   ),
                                   InkWell(
                                     onTap: () async {
-                                      setState(() {
-                                        cartItems[index].selected =
-                                            !cartItems[index].selected;
-                                      });
+                                      // setState(() {
+                                      //   cartItems[index].selected =
+                                      //       !cartItems[index].selected;
+                                      // });
                                       final cart = CartModel(
                                         img: cartItem.img,
                                         name: cartItem.name,
@@ -160,7 +171,7 @@ class _CartState extends State<Cart> {
                                             cartItem.price! + cartItem.price!,
                                         qty: 1,
                                       );
-                                      await CartHelper().addToCart(cart,cartKey);
+                                      await CartHelper().addToCart(cart);
                                       getCartItems();
                                     },
                                     child: const CircleAvatar(
@@ -191,9 +202,13 @@ class _CartState extends State<Cart> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ElevatedButton(
-                    onPressed: () {
+                    onPressed: ()async {
+                      await CartHelper().addToWishList(wishItems);
 
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => WishListScreen()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => WishListScreen()));
                     },
                     style: ElevatedButton.styleFrom(
                       primary: Colors.blue,

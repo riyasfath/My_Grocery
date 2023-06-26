@@ -202,7 +202,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 price: widget.product.tags.first.price,
                 qty: _qty,);
 
-            await CartHelper().addToCart(cart,cartKey);
+            await CartHelper().addToCart(cart);
 
             // Navigator.push(context, MaterialPageRoute(builder: (context) {
             //   return const Cart();

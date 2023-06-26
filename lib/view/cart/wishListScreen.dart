@@ -19,7 +19,7 @@ class _WishListScreenState extends State<WishListScreen> {
   }
 
   Future getCartItems() async {
-    wishItems = await CartHelper().getCartItems(wishKey);
+    wishItems = await CartHelper().getWishItems();
     setState(() {});
   }
 
