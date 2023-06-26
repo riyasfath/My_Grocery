@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:my_grocery/model/item_adapter.dart';
+import 'package:my_grocery/view/cart/buy_now_screen.dart';
 import 'package:my_grocery/view/cart/wishListScreen.dart';
-
+import 'package:hive/hive.dart';
 import '../../model/cartModel.dart';
 import 'cart_helper.dart';
+
+import 'package:path_provider/path_provider.dart' as path_provider;
 
 class Cart extends StatefulWidget {
   const Cart({super.key});
@@ -14,13 +18,60 @@ class Cart extends StatefulWidget {
 int counter = 0;
 
 class _CartState extends State<Cart> {
-  String selectedOption = '';
+  final String cartBoxName = 'cartItems';
+  Box<Item>? cartBox;
 
   List<CartModel> cartItems = [];
 
+  List<Item> selectedItems = [];
+
+  bool isSelected(Item item){
+    return selectedItems.contains(item);
+  }
+
   void initState() {
     getCartItems();
+    openCartBox();
     super.initState();
+  }
+
+  Future<void> openCartBox() async {
+    final appDecumentDir =
+        await path_provider.getApplicationDocumentsDirectory();
+    Hive.init(appDecumentDir.path);
+    Hive.registerAdapter<Item>(ItemAdapter());
+    cartBox = await Hive.openBox<Item>(cartBoxName);
+  }
+
+  void _moveToWishList() {
+    final itemsToMove = List<Item>.from(selectedItems);
+    selectedItems.clear();
+
+    //store the selected items in the wishlist box
+
+    final wishlistBox = Hive.box<Item>('wishlistItems');
+    wishlistBox.addAll(itemsToMove);
+
+    // Remove the selected items from the cart box
+    cartBox?.deleteAll(itemsToMove);
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => WishListScreen(),
+        )).then((value) {
+      if (value != null && value is List<Item>) {
+        setState(() {
+          selectedItems = value;
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    cartBox?.close();
+    Hive.close();
+    super.dispose();
   }
 
   Future getCartItems() async {
@@ -75,8 +126,16 @@ class _CartState extends State<Cart> {
             Expanded(
               child: SizedBox(
                 child: ListView.builder(
-                  itemCount: cartItems.length,
+                  // itemCount: cartItems.length,
+                  itemCount: cartBox!.length,
+                  
                   itemBuilder: (context, index) {
+                    
+                    final item=cartBox!.getAt(index)
+                    
+                    // bool isSelected = cartItems[index].selected;
+                    // final cartItem = cartItems[index];
+
                     bool isSelected = cartItems[index].selected;
                     final cartItem = cartItems[index];
 
@@ -132,7 +191,8 @@ class _CartState extends State<Cart> {
                                             cartItem.price! - cartItem.price!,
                                         qty: -1,
                                       );
-                                      await CartHelper().addToCart(cart,cartKey);
+                                      await CartHelper()
+                                          .addToCart(cart, cartKey);
                                       getCartItems();
                                     },
                                     child: const CircleAvatar(
@@ -160,7 +220,8 @@ class _CartState extends State<Cart> {
                                             cartItem.price! + cartItem.price!,
                                         qty: 1,
                                       );
-                                      await CartHelper().addToCart(cart,cartKey);
+                                      await CartHelper()
+                                          .addToCart(cart, cartKey);
                                       getCartItems();
                                     },
                                     child: const CircleAvatar(
@@ -192,8 +253,11 @@ class _CartState extends State<Cart> {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => WishListScreen()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => WishListScreen(),
+                          ));
                     },
                     style: ElevatedButton.styleFrom(
                       primary: Colors.blue,
@@ -202,7 +266,9 @@ class _CartState extends State<Cart> {
                     child: const Text("Move to Wishlist"),
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => BuyNowScreen(),));
+                    },
                     style: ElevatedButton.styleFrom(
                       primary: Colors.green,
                       textStyle: const TextStyle(color: Colors.white),
@@ -213,46 +279,6 @@ class _CartState extends State<Cart> {
               ),
             )
 
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            //   children: [
-            //     CircleAvatar(
-            //       radius: 25,
-            //       backgroundColor: Colors.grey.shade300,
-            //       child: IconButton(
-            //           onPressed: () {},
-            //           icon: const Icon(
-            //             Icons.add_shopping_cart_rounded,
-            //             color: Colors.orange,
-            //           )),
-            //     ),
-            //     Padding(
-            //       padding: const EdgeInsets.all(10),
-            //       child: SizedBox(
-            //         height: 60,
-            //         width: 300,
-            //         child: ElevatedButton(
-            //           style: const ButtonStyle(
-            //               backgroundColor: MaterialStatePropertyAll<Color>(
-            //                   Colors.orange)),
-            //           onPressed: () {
-            //             setState(() {
-            //               // ShowAlert();
-            //             });
-            //           },
-            //           child: const Text(
-            //             "Buy Now",
-            //             style: TextStyle(
-            //                 color: Colors.white,
-            //                 fontSize: 20,
-            //                 fontWeight: FontWeight.bold,
-            //                 letterSpacing: 1),
-            //           ),
-            //         ),
-            //       ),
-            //     ),
-            //   ],
-            // )
           ],
         ),
       ),
