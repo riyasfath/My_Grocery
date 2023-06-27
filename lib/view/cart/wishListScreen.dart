@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_grocery/const.dart';
 import 'package:my_grocery/model/cartModel.dart';
 import 'package:my_grocery/view/cart/cart_helper.dart';
 
@@ -50,7 +51,10 @@ class _WishListScreenState extends State<WishListScreen> {
       //     }),
       // )
 
-      body: ListView.builder(
+       body:
+
+
+          ListView.builder(
           itemCount: wishItems.length,
           itemBuilder: (context, index) {
             return Card(
@@ -65,7 +69,12 @@ class _WishListScreenState extends State<WishListScreen> {
                 ),
                 subtitle: Text(
                     'Rs. \$${wishItems[index].price?.toStringAsFixed(2)} | Quantity: ${wishItems[index].qty}'),
-                leading: const Icon(Icons.favorite, color: Colors.orange),
+                leading: Image.network(
+                  baseUrl + wishItems[index].img,
+                      width: 40,
+                  height: 40,
+
+                ),
                 trailing: IconButton(
                   icon: const Icon(Icons.delete),
                   onPressed: () {},

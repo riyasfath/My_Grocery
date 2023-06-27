@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_grocery/view/cart/payments/debit_card_payment.dart';
 
 class PaymentOptionsScreen extends StatelessWidget {
   const PaymentOptionsScreen({Key? key}) : super(key: key);
@@ -68,6 +69,7 @@ class PaymentOptionsScreen extends StatelessWidget {
             const SizedBox(height: 16.0),
             GestureDetector(
               onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => DebitCardPaymentScreen()));
                 // Handle card payments
               },
               child: const Card(
