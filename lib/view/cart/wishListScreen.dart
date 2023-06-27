@@ -57,6 +57,7 @@ class _WishListScreenState extends State<WishListScreen> {
               elevation: 4,
               margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: ListTile(
+
                 title: Text(
                   wishItems[index].name.toString(),
                   style: const TextStyle(

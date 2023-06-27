@@ -19,7 +19,9 @@ class _CartState extends State<Cart> {
 
   List<CartModel> cartItems = [];
   List<CartModel> wishItems = [];
+  List<CartModel> buyItems =[];
 
+  @override
   void initState() {
     getCartItems();
     super.initState();
@@ -36,7 +38,7 @@ class _CartState extends State<Cart> {
       child: Scaffold(
         backgroundColor: Colors.grey.shade300,
         appBar: AppBar(
-          backgroundColor: Colors.orange,
+          backgroundColor: Colors.orange[800],
           title: const Text(
             'Add Product',
             style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
@@ -95,6 +97,8 @@ class _CartState extends State<Cart> {
                         print('asdddddddd'+wishItems.length.toString());
                         setState(() {});
                       },
+
+
                       child: Container(
                         color:
                         wishItems.any((item) =>
@@ -191,6 +195,8 @@ class _CartState extends State<Cart> {
                         ),
                       ),
                     );
+
+
                   },
                 ),
               ),
@@ -205,7 +211,7 @@ class _CartState extends State<Cart> {
                   ElevatedButton(
                     onPressed: ()async {
                       await CartHelper().addToWishList(wishItems);
-                      wishItems.clear();
+
 
                       Navigator.push(
                           context,
@@ -218,9 +224,13 @@ class _CartState extends State<Cart> {
                     ),
                     child: const Text("Add to favorites"),
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => BuyNowScreen()));
+
+
+                if(wishItems.length ==1)  ElevatedButton(
+                    onPressed: () async {
+                      // await CartHelper().addToBuyNow(buyItems);
+
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => BuyNowScreen( buyItems: wishItems.first)));
 
                     },
                     style: ElevatedButton.styleFrom(
