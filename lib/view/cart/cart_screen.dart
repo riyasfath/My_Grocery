@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_grocery/view/cart/buy_now_screen.dart';
 import 'package:my_grocery/view/cart/wishListScreen.dart';
 
 import '../../model/cartModel.dart';
@@ -14,7 +15,7 @@ class Cart extends StatefulWidget {
 int counter = 0;
 
 class _CartState extends State<Cart> {
-  String selectedOption = '';
+
 
   List<CartModel> cartItems = [];
   List<CartModel> wishItems = [];
@@ -204,25 +205,29 @@ class _CartState extends State<Cart> {
                   ElevatedButton(
                     onPressed: ()async {
                       await CartHelper().addToWishList(wishItems);
+                      wishItems.clear();
 
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => WishListScreen()));
+                              builder: (context) => const WishListScreen()));
                     },
                     style: ElevatedButton.styleFrom(
                       primary: Colors.blue,
                       textStyle: const TextStyle(color: Colors.white),
                     ),
-                    child: const Text("Move to Wishlist"),
+                    child: const Text("Add to favorites"),
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => BuyNowScreen()));
+
+                    },
                     style: ElevatedButton.styleFrom(
                       primary: Colors.green,
                       textStyle: const TextStyle(color: Colors.white),
                     ),
-                    child: const Text('Buy NOw'),
+                    child: const Text('Buy Now'),
                   ),
                 ],
               ),
