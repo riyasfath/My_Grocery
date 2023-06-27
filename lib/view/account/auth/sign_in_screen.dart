@@ -41,15 +41,15 @@ class _SignInScreenState extends State<SignInScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Spacer(),
-                const Text("Welcome,",
+                 Text("Welcome,",
                     style: TextStyle(
-                        color: Colors.black,
+                        color: Colors.orange,
                         fontSize: 32,
                         fontWeight: FontWeight.bold)),
                 const Text(
                   "Sign in to continue!",
                   style: TextStyle(
-                      color: Colors.grey,
+                      color: Colors.orange,
                       fontSize: 22,
                       fontWeight: FontWeight.w400,
                       letterSpacing: 1.2),

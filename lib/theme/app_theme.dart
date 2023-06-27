@@ -8,9 +8,9 @@ class AppTheme{
   static Color lightBackgroundColor = const Color(0xfff2f2f2);
   static Color lightPrimaryColor =const Color(0xffff8900);
   static Color lightSecondaryColor =const Color(0xff040415);
-  static Color lightAccentColor =  Color(0xFFECEFF1);
+  static Color lightAccentColor =  const Color(0xFFECEFF1);
   static Color lightParticlesColor =const Color(0x44948282);
-  static Color lightTextColor = Color(0xff000000);
+  static Color lightTextColor = const Color(0xff000000);
 
   const AppTheme._();
 

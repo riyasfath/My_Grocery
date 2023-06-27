@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_grocery/const.dart';
 import 'package:my_grocery/view/cart/buy_now_screen.dart';
 import 'package:my_grocery/view/cart/wishListScreen.dart';
 
@@ -36,9 +37,9 @@ class _CartState extends State<Cart> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.grey.shade300,
+        backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: Colors.orange[800],
+          backgroundColor: Colors.green,
           title: const Text(
             'Add Product',
             style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
@@ -110,11 +111,11 @@ class _CartState extends State<Cart> {
                           children: [
                             ClipRRect(
                               borderRadius: BorderRadius.circular(20),
-                              //   child: Image.network(
-                              //    cartItem.img,
-                              //    height: 100,
-                              //    width: 100,
-                              // ),
+                                child: Image.network(
+                                  baseUrl + cartItem.img,
+                                 height: 100,
+                                 width: 100,
+                              ),
                             ),
                             const SizedBox(
                               width: 10,
