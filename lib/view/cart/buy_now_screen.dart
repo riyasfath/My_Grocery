@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_grocery/view/cart/payment_screen.dart';
 
+import 'address_screen.dart';
+
 class BuyNowScreen extends StatelessWidget {
   const BuyNowScreen({Key? key}) : super(key: key);
 
@@ -51,6 +53,10 @@ class BuyNowScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => const PaymentOptionsScreen()));
               },
+              child: const Text(
+                'Buy Now',
+                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+              ),
               style: ElevatedButton.styleFrom(
                   primary: Colors.white,
                   onPrimary: Colors.orange,
@@ -58,9 +64,34 @@ class BuyNowScreen extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8.0),
                   )),
-              child: const Text(
-                'Buy Now',
-                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+
+
+
+
+            ),
+            SizedBox(height: 16.0),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: ElevatedButton(
+                onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => AdressScreen(),));
+                },
+                child: Text(
+                  'Delivery Address',
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+
+                ),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.white,
+                  onPrimary: Colors.orange,
+                  padding: EdgeInsets.symmetric(vertical: 12.0),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  )
+                ),
               ),
             )
           ],

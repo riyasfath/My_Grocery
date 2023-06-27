@@ -7,11 +7,11 @@ class PaymentOptionsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Payment Options'),
+        title: const Text('Payment Options'),
         backgroundColor: Colors.orange[800],
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -50,12 +50,12 @@ class PaymentOptionsScreen extends StatelessWidget {
 
             ),
 
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             GestureDetector(
               onTap: (){
                 // NetBanking payment option
               },
-              child: Card(
+              child: const Card(
                 elevation: 4.0,
                 child: ListTile(leading: Icon(
                   Icons.account_balance,
@@ -65,12 +65,12 @@ class PaymentOptionsScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             GestureDetector(
               onTap: (){
                 // Handle card payments
               },
-              child: Card(
+              child: const Card(
                 elevation: 4.0,
                 child: ListTile(
                   leading: Icon(
