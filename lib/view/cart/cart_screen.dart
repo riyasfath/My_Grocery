@@ -16,11 +16,9 @@ class Cart extends StatefulWidget {
 int counter = 0;
 
 class _CartState extends State<Cart> {
-
-
   List<CartModel> cartItems = [];
   List<CartModel> wishItems = [];
-  List<CartModel> buyItems =[];
+  List<CartModel> buyItems = [];
 
   @override
   void initState() {
@@ -53,7 +51,7 @@ class _CartState extends State<Cart> {
                 children: [
                   Expanded(
                     child: Text(
-                      "Name",
+                      "Product",
                       style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -86,35 +84,29 @@ class _CartState extends State<Cart> {
 
                     return InkWell(
                       onTap: () {
-                        wishItems.any((item) =>
-                        item.name ==
-                            cartItem.name)
+                        wishItems.any((item) => item.name == cartItem.name)
+                            ? wishItems.removeWhere(
+                                (element) => element.name == cartItem.name)
+                            : wishItems.add(cartItems[index]);
 
-                        ?  wishItems.removeWhere((element) =>
-                        element.name ==
-                            cartItem.name) :wishItems.add(cartItems[index]);
-
-
-                        print('asdddddddd'+wishItems.length.toString());
+                        print('asdddddddd' + wishItems.length.toString());
                         setState(() {});
                       },
-
-
                       child: Container(
                         color:
-                        wishItems.any((item) =>
-                        item.name ==
-                            cartItem.name) ? Colors.green : null,
+                            wishItems.any((item) => item.name == cartItem.name)
+                                ? Colors.green
+                                : null,
                         padding: const EdgeInsets.symmetric(
                             horizontal: 10, vertical: 15),
                         child: Row(
                           children: [
                             ClipRRect(
                               borderRadius: BorderRadius.circular(20),
-                                child: Image.network(
-                                  baseUrl + cartItem.img,
-                                 height: 100,
-                                 width: 100,
+                              child: Image.network(
+                                baseUrl + cartItem.img,
+                                height: 100,
+                                width: 100,
                               ),
                             ),
                             const SizedBox(
@@ -196,8 +188,6 @@ class _CartState extends State<Cart> {
                         ),
                       ),
                     );
-
-
                   },
                 ),
               ),
@@ -210,9 +200,8 @@ class _CartState extends State<Cart> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ElevatedButton(
-                    onPressed: ()async {
+                    onPressed: () async {
                       await CartHelper().addToWishList(wishItems);
-
 
                       Navigator.push(
                           context,
@@ -225,21 +214,23 @@ class _CartState extends State<Cart> {
                     ),
                     child: const Text("Add to favorites"),
                   ),
+                  if (wishItems.length == 1)
+                    ElevatedButton(
+                      onPressed: () async {
+                        // await CartHelper().addToBuyNow(buyItems);
 
-
-                if(wishItems.length ==1)  ElevatedButton(
-                    onPressed: () async {
-                      // await CartHelper().addToBuyNow(buyItems);
-
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => BuyNowScreen( buyItems: wishItems.first)));
-
-                    },
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.green,
-                      textStyle: const TextStyle(color: Colors.white),
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    BuyNowScreen(buyItems: wishItems.first)));
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.green,
+                        textStyle: const TextStyle(color: Colors.white),
+                      ),
+                      child: const Text('Buy Now'),
                     ),
-                    child: const Text('Buy Now'),
-                  ),
                 ],
               ),
             )
