@@ -39,16 +39,7 @@ class _DebitCardPaymentScreenState extends State<DebitCardPaymentScreen> {
                     fontSize: 16.0,
                   ),
                 )),
-            // RaisedButton(
-            //   onPressed: () {
-            //     setState(() {
-            //       _showCardDetails = !_showCardDetails;
-            //     });
-            //   },
-            //   color: Colors.blue,
-            //   textColor: Colors.white,
-            //   child: Text('Enter Card Details'),
-            // ),
+
             SizedBox(height: 16.0),
             if (_showCardDetails)
               Card(
