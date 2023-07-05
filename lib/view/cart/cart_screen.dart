@@ -36,7 +36,8 @@ class _CartState extends State<Cart> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white,
+
+        backgroundColor: Colors.white12,
         appBar: AppBar(
           backgroundColor: Colors.orange,
           title: const Text(
