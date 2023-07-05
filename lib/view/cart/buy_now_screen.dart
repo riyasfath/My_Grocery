@@ -133,15 +133,39 @@ import 'cart_helper.dart';
 
 class BuyNowScreen extends StatefulWidget {
   final CartModel buyItems;
-  const BuyNowScreen({required this.buyItems, Key? key}) : super(key: key);
+  BuyNowScreen({required this.buyItems, Key? key}) : super(key: key);
 
   @override
   _BuyNowScreenState createState() => _BuyNowScreenState();
 }
 
 class _BuyNowScreenState extends State<BuyNowScreen> {
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  void _validateAndSubmit() {
+    if (_formKey.currentState?.validate() == true) {
+      _formKey.currentState?.save();
+      if (_address != null && _address!.isNotEmpty) {
+        // Perform navigation to another screen
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const PaymentOptionsScreen(),
+          ),
+        );
+      }
+    }
+  }
+
   int _quantity = 1;
-  String _address = '';
+  String? _address;
+
+  String? _validateAddress(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Address is required';
+    }
+    return null;
+  }
 
   @override
   void initState() {
@@ -180,9 +204,8 @@ class _BuyNowScreenState extends State<BuyNowScreen> {
               ),
             ),
             const SizedBox(height: 8.0),
-             Text(
-               widget.buyItems.price!.toString()
-              ,
+            Text(
+              widget.buyItems.price!.toString(),
               style: const TextStyle(
                 fontSize: 16.0,
               ),
@@ -218,37 +241,51 @@ class _BuyNowScreenState extends State<BuyNowScreen> {
               ],
             ),
             const SizedBox(height: 16.0),
-            TextField(
-              onChanged: (value) {
-                setState(() {
-                  _address = value;
-                });
-              },
-              decoration: const InputDecoration(
-                labelText: 'Address',
-                border: OutlineInputBorder(),
-              ),
-            ),
+            Form(
+                key: _formKey,
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    labelText: 'Address',
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Address is required';
+                    }
+                    return null;
+                  },
+                  onSaved: (value) {
+                    _address = value;
+                  },
+                )),
+            // TextField(
+            //   onChanged: (value) {
+            //     setState(() {
+            //       _address = value;
+            //     });
+            //   },
+            //   decoration: const InputDecoration(
+            //     labelText: 'Address',
+            //     border: OutlineInputBorder(),
+            //   ),
+            // ),
             const SizedBox(height: 16.0),
 
             ElevatedButton(
-                onPressed: () {
-
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const PaymentOptionsScreen()));
-                },
-                style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.blue),
-                  foregroundColor:
-                      MaterialStateProperty.all<Color>(Colors.white),
+              onPressed: _validateAndSubmit,
+              child: const Text(
+                'BUY NOW',
+                style: TextStyle(
+                  fontSize: 16.0,
                 ),
-                child: const Text(
-                  'BUY NOW',
-                  style: TextStyle(
+              ),
 
-                    fontSize: 16.0,
-                  ),
-                )),
+              // Navigator.push(context, MaterialPageRoute(builder: (context) => const PaymentOptionsScreen()));
+
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+              ),
+            ),
           ],
         ),
       ),
