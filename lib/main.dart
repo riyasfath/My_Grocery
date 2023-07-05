@@ -19,6 +19,8 @@ void main() async {
 
 
 
+
+
   //register adapters hive
   
   Hive.registerAdapter(AdBannerAdapter());

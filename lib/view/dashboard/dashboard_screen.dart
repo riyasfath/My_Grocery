@@ -6,8 +6,10 @@ import 'package:my_grocery/view/account/account_screen.dart';
 import 'package:my_grocery/view/category/category_screen.dart';
 import 'package:my_grocery/view/home/home_screen.dart';
 import 'package:my_grocery/view/product/product_screen.dart';
+
+import '../../starting_pages/starting_screen.dart';
 class DashboardScreen extends StatelessWidget {
-  const DashboardScreen({Key? key}) : super(key: key);
+   DashboardScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
