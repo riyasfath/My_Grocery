@@ -60,16 +60,23 @@ class _PaymentOptionsScreenState extends State<PaymentOptionsScreen> {
 
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-              child: Text(
-
-                widget.payItem.price!.toString(),
-                style:TextStyle(
-                  fontSize: 100,
-                  color: Colors.orange
+              // child: Text(
+              //
+              //   widget.payItem.price!.toString(),
+              //   style:const TextStyle(
+              //     fontSize: 100,
+              //     color: Colors.orange
+              //   ),
+              //
+              //
+              // ),
+              child: TextField(
+                controller: amountController,
+                decoration: InputDecoration(
+                  hintText: "Enter amount"
                 ),
-
-
               ),
+
             ),
             CupertinoButton(
               color: Colors.grey,
