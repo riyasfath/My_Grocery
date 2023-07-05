@@ -19,6 +19,7 @@ class _CartState extends State<Cart> {
   List<CartModel> cartItems = [];
   List<CartModel> wishItems = [];
   List<CartModel> buyItems = [];
+  List<CartModel> payItem = [];
 
   @override
   void initState() {
@@ -37,9 +38,9 @@ class _CartState extends State<Cart> {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: Colors.green,
+          backgroundColor: Colors.orange,
           title: const Text(
-            'Add Product',
+            'My Cart',
             style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
           ),
         ),
@@ -48,31 +49,31 @@ class _CartState extends State<Cart> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               child: const Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      "Product",
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 1),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 15,
-                  ),
-                  Text("qty"),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text("price"),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  SizedBox(
-                    width: 60,
-                  ),
-                ],
+                // children: [
+                //   Expanded(
+                //     child: Text(
+                //       "Product",
+                //       style: TextStyle(
+                //           fontSize: 20,
+                //           fontWeight: FontWeight.bold,
+                //           letterSpacing: 1),
+                //     ),
+                //   ),
+                //   SizedBox(
+                //     width: 15,
+                //   ),
+                //   Text("qty"),
+                //   SizedBox(
+                //     width: 10,
+                //   ),
+                //   Text("price"),
+                //   SizedBox(
+                //     width: 10,
+                //   ),
+                //   SizedBox(
+                //     width: 60,
+                //   ),
+                // ],
               ),
             ),
             Expanded(
@@ -95,7 +96,7 @@ class _CartState extends State<Cart> {
                       child: Container(
                         color:
                             wishItems.any((item) => item.name == cartItem.name)
-                                ? Colors.green
+                                ? Colors.lightGreen
                                 : null,
                         padding: const EdgeInsets.symmetric(
                             horizontal: 10, vertical: 15),

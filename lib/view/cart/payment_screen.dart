@@ -4,14 +4,19 @@ import 'package:flutter/material.dart';
 
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
+import '../../model/cartModel.dart';
+
 class PaymentOptionsScreen extends StatefulWidget {
-  const PaymentOptionsScreen({Key? key}) : super(key: key);
+  final CartModel payItem;
+
+  const PaymentOptionsScreen({required this.payItem, Key? key}) : super(key: key);
 
   @override
   State<PaymentOptionsScreen> createState() => _PaymentOptionsScreenState();
 }
 
 class _PaymentOptionsScreenState extends State<PaymentOptionsScreen> {
+
   var _razorpay = Razorpay();
   var amountController = TextEditingController();
 
@@ -43,7 +48,8 @@ class _PaymentOptionsScreenState extends State<PaymentOptionsScreen> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: const CupertinoNavigationBar(
-        middle: Text("Payments"),
+        middle: Text("Place order",
+        style: TextStyle(color: Colors.orange)),
       ),
       body: Container(
         height: size.height,
@@ -51,16 +57,23 @@ class _PaymentOptionsScreenState extends State<PaymentOptionsScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
+
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-              child: TextField(
-                  controller: amountController,
-                  decoration:
-                      const InputDecoration(hintText: "Enter your amount")),
+              child: Text(
+
+                widget.payItem.price!.toString(),
+                style:TextStyle(
+                  fontSize: 100,
+                  color: Colors.orange
+                ),
+
+
+              ),
             ),
             CupertinoButton(
               color: Colors.grey,
-              child: const Text("Pay Amount"),
+              child: const Text("Proceed"),
               onPressed: () {
                 // Make Payment
                 var options = {

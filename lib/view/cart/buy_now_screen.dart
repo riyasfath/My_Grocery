@@ -150,7 +150,7 @@ class _BuyNowScreenState extends State<BuyNowScreen> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const PaymentOptionsScreen(),
+            builder: (context) =>   PaymentOptionsScreen(payItem: widget.buyItems),
           ),
         );
       }
@@ -182,8 +182,8 @@ class _BuyNowScreenState extends State<BuyNowScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.orange[800],
-        title: const Text('Buy Now'),
+        backgroundColor: Colors.orange,
+        title: const Text('Order Summary'),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -231,7 +231,7 @@ class _BuyNowScreenState extends State<BuyNowScreen> {
                   ),
                 ),
                 IconButton(
-                  icon: Icon(Icons.add),
+                  icon: const Icon(Icons.add),
                   onPressed: () {
                     setState(() {
                       _quantity++;
@@ -244,7 +244,7 @@ class _BuyNowScreenState extends State<BuyNowScreen> {
             Form(
                 key: _formKey,
                 child: TextFormField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Address',
                   ),
                   validator: (value) {
@@ -273,7 +273,7 @@ class _BuyNowScreenState extends State<BuyNowScreen> {
             ElevatedButton(
               onPressed: _validateAndSubmit,
               child: const Text(
-                'BUY NOW',
+                'Continue',
                 style: TextStyle(
                   fontSize: 16.0,
                 ),
@@ -282,7 +282,7 @@ class _BuyNowScreenState extends State<BuyNowScreen> {
               // Navigator.push(context, MaterialPageRoute(builder: (context) => const PaymentOptionsScreen()));
 
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.orange),
                 foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
               ),
             ),

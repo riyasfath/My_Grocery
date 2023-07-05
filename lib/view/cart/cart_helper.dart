@@ -59,20 +59,6 @@ class CartHelper {
     return (list as List).map((e) => CartModel.fromJson(e)).toList();
   }
 
-  //=============================buy now adding====================//
-// Future addToBuyNow(List<CartModel> buylist)async{
-//     final prefs = await SharedPreferences.getInstance();
-//
-//     prefs.setString('buyItems', jsonEncode(buylist.map((e) => e.toJson()).toList()));
-// }
-// Future<List<CartModel>>getBuyItems()async{
-//     final prefs = await SharedPreferences.getInstance();
-//     final data = prefs.getString('buyItems');
-//     if(data == null) return [];
-//     final list = jsonDecode(data);
-//     return (list as List).map((e) => CartModel.fromJson(e)).toList();
-//
-//
-// }
+
   
 }
