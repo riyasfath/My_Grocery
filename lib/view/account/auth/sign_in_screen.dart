@@ -1,3 +1,134 @@
+// import 'package:flutter/material.dart';
+//
+// class SignInScreen extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: Container(
+//         decoration: BoxDecoration(
+//           gradient: LinearGradient(
+//             colors: [Colors.orange, Colors.white],
+//             begin: Alignment.topCenter,
+//             end: Alignment.bottomCenter,
+//           ),
+//         ),
+//         child: Center(
+//           child: SingleChildScrollView(
+//             child: Column(
+//               mainAxisAlignment: MainAxisAlignment.center,
+//               children: [
+//                 Text(
+//                   'Welcome',
+//                   style: TextStyle(
+//                     fontSize: 32,
+//                     fontWeight: FontWeight.bold,
+//                     color: Colors.white,
+//                   ),
+//                 ),
+//                 SizedBox(height: 16),
+//                 Text(
+//                   'Sign in to continue',
+//                   style: TextStyle(
+//                     fontSize: 18,
+//                     color: Colors.white,
+//                   ),
+//                 ),
+//                 SizedBox(height: 32),
+//                 Padding(
+//                   padding: EdgeInsets.symmetric(horizontal: 32),
+//                   child: TextField(
+//                     decoration: InputDecoration(
+//                       labelText: 'Email',
+//                       labelStyle: TextStyle(color: Colors.white),
+//                       enabledBorder: OutlineInputBorder(
+//                         borderSide: BorderSide(color: Colors.white),
+//                         borderRadius: BorderRadius.circular(8),
+//                       ),
+//                       focusedBorder: OutlineInputBorder(
+//                         borderSide: BorderSide(color: Colors.white),
+//                         borderRadius: BorderRadius.circular(8),
+//                       ),
+//                     ),
+//                   ),
+//                 ),
+//                 SizedBox(height: 16),
+//                 Padding(
+//                   padding: EdgeInsets.symmetric(horizontal: 32),
+//                   child: TextField(
+//                     obscureText: true,
+//                     decoration: InputDecoration(
+//                       labelText: 'Password',
+//                       labelStyle: TextStyle(color: Colors.white),
+//                       enabledBorder: OutlineInputBorder(
+//                         borderSide: BorderSide(color: Colors.white),
+//                         borderRadius: BorderRadius.circular(8),
+//                       ),
+//                       focusedBorder: OutlineInputBorder(
+//                         borderSide: BorderSide(color: Colors.white),
+//                         borderRadius: BorderRadius.circular(8),
+//                       ),
+//                     ),
+//                   ),
+//                 ),
+//                 SizedBox(height: 16),
+//                 TextButton(
+//                   onPressed: () {
+//                     // Handle Forgot Password button press
+//                   },
+//                   child: Text(
+//                     'Forgot password?',
+//                     style: TextStyle(color: Colors.white),
+//                   ),
+//                 ),
+//                 SizedBox(height: 32),
+//                 ElevatedButton(
+//                   onPressed: () {
+//                     // Handle Sign In button press
+//                   },
+//                   style: ElevatedButton.styleFrom(
+//                     primary: Colors.orange,
+//                     padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+//                     shape: RoundedRectangleBorder(
+//                       borderRadius: BorderRadius.circular(8),
+//                     ),
+//                   ),
+//                   child: Text(
+//                     'Sign In',
+//                     style: TextStyle(fontSize: 18),
+//                   ),
+//                 ),
+//                 SizedBox(height: 16),
+//                 Row(
+//                   mainAxisAlignment: MainAxisAlignment.center,
+//                   children: [
+//                     IconButton(
+//                       onPressed: () {
+//                         // Handle Back button press
+//                       },
+//                       icon: Icon(Icons.arrow_back, color: Colors.white),
+//                     ),
+//                     SizedBox(width: 8),
+//                     TextButton(
+//                       onPressed: () {
+//                         // Handle New User Sign Up button press
+//                       },
+//                       child: Text(
+//                         'New User? Sign Up',
+//                         style: TextStyle(color: Colors.white),
+//                       ),
+//                     ),
+//                   ],
+//                 ),
+//               ],
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+
 import 'package:flutter/material.dart';
 import 'package:my_grocery/controller/controllers.dart';
 import 'package:my_grocery/extention/string_extention.dart';

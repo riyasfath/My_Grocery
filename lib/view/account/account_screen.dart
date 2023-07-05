@@ -22,7 +22,7 @@ class AccountScreen extends StatelessWidget {
                 radius: 36,
                 child: CircleAvatar(
                   radius: 35,
-                  backgroundImage: AssetImage("assets/user_image.png"),
+                  backgroundImage: AssetImage("assets/user.png"),
                 ),
               ),
               const SizedBox(width: 10),
@@ -43,7 +43,7 @@ class AccountScreen extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const SignInScreen()));
+                        builder: (context) =>  SignInScreen()));
               }),
           buildAccountCard(title: "Notification", onClick: () {}),
           buildAccountCard(title: "Settings", onClick: () {}),
@@ -57,7 +57,7 @@ class AccountScreen extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const SignInScreen()));
+                      builder: (context) =>  SignInScreen()));
             }
           }))
         ],
